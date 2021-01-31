@@ -13,6 +13,11 @@ class DatabaseHelper {
   final String columnId = 'id';
   final String columnTitle = 'title';
   final String columnDescription = 'description';
+  final String columnDuration = 'duration';
+  final String meetingRoom = 'meetingroom';
+  final String priority = 'priorityty';
+  final String reminder = 'reminder';
+  final String dateTime = 'datetime';
  
   static Database _db;
  
@@ -39,7 +44,7 @@ class DatabaseHelper {
  
   void _onCreate(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE $tableNote($columnId INTEGER PRIMARY KEY, $columnTitle TEXT, $columnDescription TEXT)');
+        'CREATE TABLE $tableNote($columnId INTEGER PRIMARY KEY, $columnTitle TEXT, $columnDescription TEXT , $columnDuration TEXT, $meetingRoom TEXT, $priority TEXT, $reminder TEXT, $dateTime DATETIME)');
   }
  
   Future<int> saveNote(Note note) async {
@@ -53,7 +58,7 @@ class DatabaseHelper {
  
   Future<List> getAllNotes() async {
     var dbClient = await db;
-    var result = await dbClient.query(tableNote, columns: [columnId, columnTitle, columnDescription]);
+    var result = await dbClient.query(tableNote, columns: [columnId, columnTitle, columnDescription, columnDuration, meetingRoom, priority, reminder, dateTime]);
 //    var result = await dbClient.rawQuery('SELECT * FROM $tableNote');
  
     return result.toList();
@@ -67,7 +72,7 @@ class DatabaseHelper {
   Future<Note> getNote(int id) async {
     var dbClient = await db;
     List<Map> result = await dbClient.query(tableNote,
-        columns: [columnId, columnTitle, columnDescription],
+        columns: [columnId, columnTitle, columnDescription, columnId, columnTitle, columnDescription, columnDuration, meetingRoom, priority, reminder, dateTime],
         where: '$columnId = ?',
         whereArgs: [id]);
 //    var result = await dbClient.rawQuery('SELECT * FROM $tableNote WHERE $columnId = $id');
