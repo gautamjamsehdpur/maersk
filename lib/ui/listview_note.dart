@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Maersk/model/listfile.dart';
 import 'package:Maersk/util/database_helper.dart';
 import 'package:Maersk/ui/note_screen.dart';
+import 'package:Maersk/ui/settings.dart';
  
 class ListViewNote extends StatefulWidget {
   @override
@@ -30,6 +31,11 @@ class _ListViewNoteState extends State<ListViewNote> {
       case 'Logout':
         break;
       case 'Settings':
+      //MaterialPageRoute(builder: (context) => Settings());
+      Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Settings()),
+  );
         break;
     }
 }
